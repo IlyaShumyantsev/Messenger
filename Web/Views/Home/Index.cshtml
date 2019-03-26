@@ -1,0 +1,99 @@
+﻿@using Domain.Entities
+@using Web.Models
+@model ModelCollection
+@{
+    /**/
+
+    ViewBag.Title = Model.GetModel<UserViewModel>().User.FirstName + " " + Model.GetModel<UserViewModel>().User.Surname;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-contents">
+    <div class="container">
+        <div class="row">
+            <!-- Newsfeed Common Side Bar Left
+            ================================================= -->
+            <div class="col-md-3 static">
+                <div class="profile-card">
+                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo" />
+                    <!--ВСТАВИТЬ ССЫЛКУ НА СЕБЯ-->
+                    <h5><a href="@Url.Action("", "", new { id = Model.GetModel<UserViewModel>().User.Id }, null)" class="text-white"> @((Model.GetModel<UserViewModel>().User).FirstName) @((Model.GetModel<UserViewModel>().User).Surname)</a></h5>
+                    <!--КОЛИЧЕСТВО ДРУЗЕЙ-->
+                    <a href="@Url.Action("", "Friends")" class="text-white"><i class="ion ion-android-person-add"></i>@((Model.GetModel<FriendsViewModel>().Friends).Count()) (заявки: @((Model.GetModel<FriendsViewModel>().IncomingRequests).Count()))</a>
+                </div><!--profile card ends-->
+                <ul class="nav-news-feed">
+                    <li><i class="icon ion-ios-people"></i><div>@Html.ActionLink("Поиск", "Index", "Search")</div></li>
+                    <li><i class="icon ion-ios-people-outline"></i><div>@Html.ActionLink("Друзья", "Index", "Friends")</div></li>
+                    <li><i class="icon ion-chatboxes"></i><div>@Html.ActionLink("Сообщения", "Index", "Messages")</div></li>
+                    <li><i class="icon ion-ios-paper"></i><div>@Html.ActionLink("Выход", "Logout", "Account")</div></li>
+                </ul><!--news-feed links ends-->
+            </div>
+
+            <div class="col-md-7">
+                <!-- Chat Room
+                ================================================= -->
+                <div class="chat-room">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <!-- Contact List in Left-->
+                            <!--СЮДА ВСТАВИТЬ СПИСОК ДРУЗЕЙ-->
+                            <ul class="nav nav-tabs contact-list scrollbar-wrapper scrollbar-outer">
+                                @foreach (User user in Model.GetModel<FriendsViewModel>().Friends)
+                                {
+                                    <li class="active">
+                                        <a href="@Url.Action("Index", "Home", new { id = user.Id }, null)" data-toggle="tab">
+                                            <div class="contact">
+                                                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
+                                                <div class="msg-preview">
+                                                    <h6>@user.FirstName @user.Surname</h6>
+                                                    <p class="text-muted">Hi there, how are you</p>
+                                                    <!--ВСТАВИТЬ ДАТУ ПОСЛЕДНЕГО СООБЩЕНИЯ-->
+                                                    <small class="text-muted" href="@Url.Action("DeleteFriend", "Friends", new { id = user.Id }))">LALALA</small>
+                                                    <div class="chat-alert">1</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+
+                            <!--Contact List in Left End-->
+                            <div style="border: 1px solid red; padding: 5px 5px 5px 5px;">
+                                @if (@Model.GetModel<UserViewModel>().UserIsMe)
+                                {
+                                    <div>Это вы!</div>
+                                }
+                                else if (@Model.GetModel<UserViewModel>().UserIsMyFriend)
+                                {
+                                    <div>
+                                        Этот пользователь ваш друг. @Html.ActionLink("Сообщение", "NewMessage", "Messages", new { userToId = @Model.GetModel<UserViewModel>().User.Id }, null)
+                                        @Html.ActionLink("Удалить из друзей", "DeleteFriend", "Friends", new { id = @Model.GetModel<UserViewModel>().User.Id }, null)
+                                    </div>
+                                }
+                                else if (@Model.GetModel<UserViewModel>().FriendRequestIsSent)
+                                {
+                                    <div>
+                                        Вы отправили заявку в друзья. Пользователь пока не подтвердил её.
+                                        @Html.ActionLink("Отменить заявку", "CancleFriendRequest", "Friends", new { id = @Model.GetModel<UserViewModel>().User.Id }, null)
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div>@Html.ActionLink("Добавить в друзья", "AddFriendRequest", "Friends", new { id = @Model.GetModel<UserViewModel>().User.Id }, null)</div>
+                                }
+                            </div>
+                        </div>
+                        <!--СООБЩЕНИЯ БЫЛИ ТУТ-->
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/js/jquery-3.1.1.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/bootstrap.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/jquery.sticky-kit.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/jquery.scrollbar.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/script.js")" type="text/javascript"></script>

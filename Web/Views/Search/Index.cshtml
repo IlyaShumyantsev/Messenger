@@ -1,0 +1,53 @@
+﻿@using Domain.Entities
+@model IEnumerable<User>
+@{
+    ViewBag.Title = "Поиск пользователей";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-contents">
+    <div class="container">
+        <div class="row">
+            <!-- Newsfeed Common Side Bar Left
+            ================================================= -->
+            <div class="col-md-3 static">
+                <div class="profile-card">
+                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo" />
+                    <!--ВСТАВИТЬ ССЫЛКУ НА СЕБЯ-->
+                    <h5><a href="@Url.Action("", "", null, null)" class="text-white">На главную</a></h5>
+                    <!--КОЛИЧЕСТВО ДРУЗЕЙ-->
+                    <a href="@Url.Action("", "Friends")" class="text-white"><i class="ion ion-android-person-add"> Друзья</i></a>
+                </div><!--profile card ends-->
+                <ul class="nav-news-feed">
+                    <li><i class="icon ion-ios-people"></i><div>@Html.ActionLink("Поиск", "Index", "Search")</div></li>
+                    <li><i class="icon ion-ios-people-outline"></i><div>@Html.ActionLink("Друзья", "Index", "Friends")</div></li>
+                    <li><i class="icon ion-chatboxes"></i><div>@Html.ActionLink("Сообщения", "Index", "Messages")</div></li>
+                    <li><i class="icon ion-ios-paper"></i><div>@Html.ActionLink("Выход", "Logout", "Account")</div></li>
+                </ul><!--news-feed links ends-->
+            </div>
+
+            <div class="col-md-7">
+                <!-- Chat Room
+    ================================================= -->
+                <h2>Поиск пользователей</h2>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        <p>Поиск по Фамилии и имени:</p>
+                        <p>Имя: @Html.TextBox("firstName")</p>
+                        <p>Фамилия: @Html.TextBox("surname")</p>
+                        <input type="submit" value="Поиск" />
+                    }
+                </div>
+                @if (Model != null && Model.Any())
+                {
+                    <p>Результаты поиска:</p>
+                    foreach (User user in Model)
+                    {
+                        <div>@Html.ActionLink(user.FirstName + " " + user.Surname, "Index", "Home", new { id = user.Id }, null)</div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

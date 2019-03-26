@@ -1,0 +1,19 @@
+﻿@using Web.Models;
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Добро пожаловать";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Авторизация</h2>
+<div>
+    @using (Html.BeginForm())
+    {
+        <p>@Html.ValidationSummary(true)</p>
+        <p>Логин: @Html.TextBoxFor(x => x.UserName) @Html.ValidationMessageFor(x => x.UserName)</p>
+        <p>Пароль: @Html.EditorFor(x => x.Password) @Html.ValidationMessageFor(x => x.Password)</p>
+        <input type="submit" value="Вход"/>
+    }
+    <p>Вы можете @Html.ActionLink("создать", "Register") аккаунт</p>
+</div>

@@ -1,0 +1,57 @@
+﻿@using Web.Models
+@model RegisterViewModel
+@{
+    ViewBag.Title = "Friend Finder | Регистрация";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="banner">
+    <div class="container">
+        <div class="sign-up-form">
+            <a href="Index" class="logo"><img src="~/Content/images/logo.png" alt="Friend Finder" /></a>
+            <h2 class="text-white">Find My Friends</h2>
+            <div class="line-divider"></div>
+            <div class="form-wrapper">
+                @using (Html.BeginForm())
+                {
+                    <p class="signup-text">Зарегистрируйтесь и начните общаться со всем миром</p>
+                    <form action="#">
+                        <p>@Html.ValidationSummary(true)</p>
+                        <fieldset class="form-group">
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @id = "example-name", @placeholder = "Логин", @type = "text" })
+                            @Html.ValidationMessageFor(x => x.UserName)
+                        </fieldset>
+                        <fieldset class="form-group">
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control", @id = "example-password", @placeholder = "Пароль", @type = "password" })
+                            @Html.ValidationMessageFor(x => x.Password)
+                        </fieldset>
+                        <fieldset class="form-group">
+                            @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", @id = "example-password", @placeholder = "Повторите пароль", @type = "password" })
+                            @Html.ValidationMessageFor(x => x.ConfirmPassword)
+                        </fieldset>
+                        <fieldset class="form-group">
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @id = "example-name", @placeholder = "Email", @type = "text" })
+                            @Html.ValidationMessageFor(x => x.Email)
+                        </fieldset>
+                        <fieldset class="form-group">
+                            @Html.TextBoxFor(x => x.ConfirmEmail, new { @class = "form-control", @id = "example-name", @placeholder = "Повторите email", @type = "text" })
+                            @Html.ValidationMessageFor(x => x.ConfirmEmail)
+                        </fieldset>
+                        <fieldset class="form-group">
+                            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @id = "example-name", @placeholder = "Имя", @type = "text" })
+                            @Html.ValidationMessageFor(x => x.FirstName)
+                        </fieldset>
+                        <fieldset class="form-group">
+                            @Html.TextBoxFor(x => x.Surname, new { @class = "form-control", @id = "example-name", @placeholder = "Фамилия", @type = "text" })
+                            @Html.ValidationMessageFor(x => x.Surname)
+                        </fieldset>
+                        <button class="btn-secondary" type="submit">Готово</button>
+                    </form>
+                    <p></p>
+                }
+            </div>
+            <p>@Html.ActionLink("Уже есть аккаунт?", "Index")</p>
+            <img class="form-shadow" src="~/Content/images/bottom-shadow.png" alt="" />
+        </div>
+    </div>
+</section>

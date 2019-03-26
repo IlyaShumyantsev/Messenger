@@ -1,0 +1,23 @@
+﻿@using Web.Models
+@model List<OutgoingMessageViewModel>
+@{
+    ViewBag.Title = "Сообщения";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Html.ActionLink("Входящие", "Index", "Messages") | Исходящие</h2>
+<table>
+    <tr>
+        <td>Кому</td>
+        <td>Когда</td>
+        <td>Текст</td>
+    </tr>
+    @foreach (OutgoingMessageViewModel message in Model)
+    {
+        <tr>
+            <td>@message.UserTo.FirstName @message.UserTo.Surname</td>
+            <td>@message.Message.CreateDate</td>
+            <td>@message.Message.Text</td>
+        </tr>
+    }
+</table>

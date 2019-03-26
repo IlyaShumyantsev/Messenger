@@ -1,0 +1,56 @@
+﻿@using Domain.Entities
+@using Web.Models
+@model List<IncomingMessageViewModel>
+
+@{
+    ViewBag.Title = "Сообщения";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-contents">
+    <div class="container">
+        <div class="row">
+            <!-- Newsfeed Common Side Bar Left
+            ================================================= -->
+            <div class="col-md-3 static">
+                <div class="profile-card">
+                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo" />
+                    <!--ВСТАВИТЬ ССЫЛКУ НА СЕБЯ-->
+                    <h5><a href="@Url.Action("", "", null, null)" class="text-white">На главную</a></h5>
+                    <!--КОЛИЧЕСТВО ДРУЗЕЙ-->
+                    <a href="@Url.Action("", "Friends")" class="text-white"><i class="ion ion-android-person-add"> Друзья</i></a>
+                </div><!--profile card ends-->
+                <ul class="nav-news-feed">
+                    <li><i class="icon ion-ios-people"></i><div>@Html.ActionLink("Поиск", "Index", "Search")</div></li>
+                    <li><i class="icon ion-ios-people-outline"></i><div>@Html.ActionLink("Друзья", "Index", "Friends")</div></li>
+                    <li><i class="icon ion-chatboxes"></i><div>@Html.ActionLink("Сообщения", "Index", "Messages")</div></li>
+                    <li><i class="icon ion-ios-paper"></i><div>@Html.ActionLink("Выход", "Logout", "Account")</div></li>
+                </ul><!--news-feed links ends-->
+            </div>
+
+            <div class="col-md-7">
+                <!-- Chat Room
+    ================================================= -->
+                <h2>Входящие | @Html.ActionLink("Исходящие", "Outgoing", "Messages")</h2>
+                <table>
+                    <tr>
+                        <td>От кого</td>
+                        <td>Когда</td>
+                        <td>Текст</td>
+                    </tr>
+                    @foreach (IncomingMessageViewModel message in Model)
+                    {
+                        <tr>
+                            <td>@message.UserForm.FirstName @message.UserForm.Surname</td>
+                            <td>@message.Message.CreateDate</td>
+                            <td>@message.Message.Text</td>
+                        </tr>
+                    }
+                </table>
+                <div class="chat-room">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

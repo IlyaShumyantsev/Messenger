@@ -1,0 +1,38 @@
+﻿@using Web.Models;
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Friend Finder | Авторизация";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="banner">
+    <div class="container">
+        <div class="sign-up-form">
+            <a href="Index" class="logo"><img src="~/Content/images/logo.png" alt="Friend Finder" /></a>
+            <h2 class="text-white">Find My Friends</h2>
+            <div class="line-divider"></div>
+            <div class="form-wrapper">
+                @using (Html.BeginForm())
+                {
+                    <p class="signup-text">Войдите и начните общаться со своими друзьями прямо сейчас</p>
+                    <form action="#">
+                        <p>@Html.ValidationSummary(true)</p>
+                        <fieldset class="form-group">
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @id = "example-name", @placeholder = "Ваш логин", @type = "text" })
+                            @Html.ValidationMessageFor(x => x.UserName)
+                        </fieldset>
+                        <fieldset class="form-group">
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control", @id = "example-password", @placeholder = "Ваш пароль", @type = "password" })
+                            @Html.ValidationMessageFor(x => x.Password)
+                        </fieldset>
+                        <button class="btn-secondary" type="submit">Войти</button>
+                    </form>
+                    <p></p>
+                }
+            </div>
+            <p>Если у Вас ещё нет аккаунта, Вы можете его <ins>@Html.ActionLink("зарегистрировать", "Register")</ins> прямо сейчас</p>
+            <img class="form-shadow" src="~/Content/images/bottom-shadow.png" alt="" />
+        </div>
+    </div>
+</section>

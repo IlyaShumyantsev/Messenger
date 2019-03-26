@@ -1,0 +1,13 @@
+D:\My Projects\Messenger\Domain\bin\Release\Domain.dll.config
+D:\My Projects\Messenger\Domain\bin\Release\Domain.dll
+D:\My Projects\Messenger\Domain\bin\Release\Domain.pdb
+D:\My Projects\Messenger\Domain\bin\Release\EntityFramework.dll
+D:\My Projects\Messenger\Domain\bin\Release\EntityFramework.SqlServer.dll
+D:\My Projects\Messenger\Domain\bin\Release\EntityFramework.xml
+D:\My Projects\Messenger\Domain\bin\Release\EntityFramework.SqlServer.xml
+D:\My Projects\Messenger\Domain\bin\Release\ru\EntityFramework.resources.dll
+D:\My Projects\Messenger\Domain\obj\Release\Domain.csprojAssemblyReference.cache
+D:\My Projects\Messenger\Domain\obj\Release\Domain.csproj.CoreCompileInputs.cache
+D:\My Projects\Messenger\Domain\obj\Release\Domain.csproj.CopyComplete
+D:\My Projects\Messenger\Domain\obj\Release\Domain.dll
+D:\My Projects\Messenger\Domain\obj\Release\Domain.pdb

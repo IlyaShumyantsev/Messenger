@@ -1,0 +1,25 @@
+﻿@using Domain.Entities
+@model IEnumerable<User>
+@{
+    ViewBag.Title = "Поиск пользователей";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Поиск пользователей</h2>
+<div>
+    @using (Html.BeginForm())
+    {
+        <p>Поиск по Фамилии и имени:</p>
+        <p>Имя: @Html.TextBox("firstName")</p>
+        <p>Фамилия: @Html.TextBox("surname")</p>
+        <input type="submit" value="Поиск" />
+    }
+</div>
+@if(Model != null && Model.Any())
+{
+    <p>Результаты поиска:</p>
+    foreach(User user in Model)
+    {
+        <div>@Html.ActionLink(user.FirstName + " " + user.Surname, "Index", "Home", new { id = user.Id }, null)</div>
+    }
+}

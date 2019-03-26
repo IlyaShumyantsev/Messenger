@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Friend Finder | Регистрация";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="banner">
+    <div class="container">
+        <div class="sign-up-form">
+            <a href="Index" class="logo"><img src="~/Content/images/logo.png" alt="Friend Finder" /></a>
+            <h2 class="text-white">Find My Friends</h2>
+            <div class="line-divider"></div>
+            <div class="form-wrapper">
+                @using (Html.BeginForm())
+                {
+                    <p class="signup-text">Поздравляем! Регистрация прошла успешно! Теперь вы можете войти и начать общение!</p>
+                    <p></p>
+                }
+                <button class="btn-secondary" onclick="window.location.href='/'">Войти</button>
+                <!--@Html.ActionLink("Войти", "Index", "Home")-->
+            </div>
+            <p>Хотите <ins>@Html.ActionLink("зарегистрировать", "Register")</ins> своего друга?</p>
+            <img class="form-shadow" src="~/Content/images/bottom-shadow.png" alt="" />
+        </div>
+    </div>
+</section>
